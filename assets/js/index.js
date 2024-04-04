@@ -1,4 +1,21 @@
 $(document).ready(function () {
+    // Điều khiển việc chuyển slide trong carousel
+    $('#carouselExampleCaptions').carousel({
+        interval: 5000, // Thời gian chuyển slide (5 giây)
+        wrap: true // Cho phép quay vòng khi đến slide cuối cùng
+    });
+
+    var navbar = $('.navbar');
+    var navbarHeight = navbar.outerHeight();
+
+    $(window).scroll(function() {
+        if ($(window).scrollTop() >= navbarHeight) {
+            navbar.addClass('fixed-top');
+        } else {
+            navbar.removeClass('fixed-top');
+        }
+    });
+
     $('.dropdown-toggle').on('click', function () {
         var $parent = $(this).parent();
         var isOpen = $parent.hasClass('show');
@@ -33,12 +50,13 @@ $(document).ready(function () {
     // Xử lý sự kiện đăng xuất
     $('#logout').click(function (e) {
         e.preventDefault();
-        // Xóa email khỏi localStorage khi đăng xuất
-        localStorage.removeItem('userEmail');
-        $('#loginSection').show();
-        $('#userSection').hide();
-    });
 
-    // Điều khiển việc chuyển slide trong carousel
-    $('#carouselExampleCaptions').carousel();
+        // Hiển thị hộp thoại xác nhận
+        if (confirm("Are you sure you want to log out?")) {
+            // Nếu người dùng xác nhận muốn đăng xuất, tiến hành xóa email khỏi localStorage và hiển thị phần đăng nhập
+            localStorage.removeItem('userEmail');
+            $('#loginSection').show();
+            $('#userSection').hide();
+        }
+    });
 });

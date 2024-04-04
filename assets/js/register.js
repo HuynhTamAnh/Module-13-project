@@ -3,7 +3,7 @@ function uuid() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Mong muốn của chúng ta
+
     Validator({
         form: '#form-1',
         formGroupSelector: '.form-group',
