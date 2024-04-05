@@ -75,17 +75,20 @@ function addToCart(id) {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
   let productToAdd = gundams.find((product) => product.id === id);
 
-  if (!productToAdd) {
-    alert("Sản phẩm không tồn tại.");
-    return;
-  }
+  console.log("cart", cart);
 
-  let existingProduct = cart.find((product) => product.id === productToAdd.id);
+  // if (!productToAdd) {
+  //   alert("Sản phẩm không tồn tại.");
+  //   return;
+  // }
+
+  let existingProduct = cart.find((product) => product.id == productToAdd.id);
 
   if (existingProduct) {
     // Sản phẩm đã tồn tại trong giỏ hàng, tăng số lượng
     existingProduct.quantity += 1;
   } else {
+    console.log("productToAdd", productToAdd);
     // Sản phẩm chưa tồn tại trong giỏ hàng, thêm mới vào
     productToAdd.quantity = 1; // Thiết lập số lượng ban đầu là 1
     cart.push(productToAdd);
@@ -115,7 +118,6 @@ function renderProductItem(id) {
         </div>
       `;
 
-      // Xóa nội dung cũ của phần tử có id là "mg1100" trước khi thêm thông tin chi tiết sản phẩm mới vào
       const mg1100Element = document.getElementById("mg1100");
       mg1100Element.innerHTML = "";
 
@@ -144,7 +146,6 @@ if (product) {
       <h2>Daban 1/100 MG Infinity Justice Gundam</h2><hr>
       <h5>680,000VNĐ</h5>
       <button onclick="addToCart('${product.id}')" >Thêm vào giỏ hàng</button>
-      
   </div>
 </div>
     `;
